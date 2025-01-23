@@ -19,11 +19,11 @@ To install GeoPyTools, follow these steps:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/githubnext/workspace-blank.git
+   git clone https://github.com/bantoinese83/GeoPyTools.git
    ```
 2. Navigate to the project directory:
    ```
-   cd workspace-blank
+   cd GeoPyTools
    ```
 3. Install the required dependencies:
    ```
