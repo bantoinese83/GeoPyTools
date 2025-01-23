@@ -87,6 +87,26 @@ location = geocode_address(address)
 print(f"The coordinates of the address are {location}")
 ```
 
+### Geocode Address using OpenCage API
+
+```python
+from geopytools.geocode import geocode_address
+
+address = "1600 Amphitheatre Parkway, Mountain View, CA"
+location = geocode_address(address, api="opencage")
+print(f"The coordinates of the address using OpenCage API are {location}")
+```
+
+### Geocode Address using MapQuest API
+
+```python
+from geopytools.geocode import geocode_address
+
+address = "1600 Amphitheatre Parkway, Mountain View, CA"
+location = geocode_address(address, api="mapquest")
+print(f"The coordinates of the address using MapQuest API are {location}")
+```
+
 ### Geocode Address Asynchronously
 
 ```python
@@ -175,6 +195,7 @@ Geocode an address using a geocoding API.
 
 **Parameters:**
 - `address` (str): The address to geocode.
+- `api` (str): The geocoding API to use ("google", "opencage", "mapquest").
 
 **Returns:**
 - `tuple`: The latitude and longitude of the address.
@@ -188,6 +209,7 @@ Asynchronously geocode an address using a geocoding API.
 
 **Parameters:**
 - `address` (str): The address to geocode.
+- `api` (str): The geocoding API to use ("google", "opencage", "mapquest").
 
 **Returns:**
 - `tuple`: The latitude and longitude of the address.
@@ -219,6 +241,8 @@ The default configuration is defined in the `config.py` file:
 ```python
 DEFAULT_UNIT = "km"
 API_KEY = "your-default-api-key"
+OPENCAGE_API_KEY = "your-opencage-api-key"
+MAPQUEST_API_KEY = "your-mapquest-api-key"
 
 class Config:
     unit = "km"
