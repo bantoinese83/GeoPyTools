@@ -1,5 +1,9 @@
 # GeoPyTools
 
+![Build Status](https://img.shields.io/github/workflow/status/bantoinese83/GeoPyTools/Lint)
+![Coverage](https://img.shields.io/codecov/c/github/bantoinese83/GeoPyTools)
+![License](https://img.shields.io/github/license/bantoinese83/GeoPyTools)
+
 GeoPyTools is a utility to calculate distances, geocode addresses, and analyze geospatial data easily. It provides a set of tools for geospatial analysis, including distance calculations, geocoding, and data analysis.
 
 ## Purpose
@@ -8,27 +12,21 @@ GeoPyTools aims to provide a comprehensive set of tools for geospatial analysis,
 
 ## Features
 
-- Calculate distances between two points using the Haversine formula
-- Calculate distances between two points using the Vincenty formula
-- Geocode addresses using a geocoding API
-- Analyze geospatial data, such as finding the centroid of a set of points
+| Feature | Description |
+|---------|-------------|
+| Distance Calculation | Calculate distances between two points using the Haversine and Vincenty formulas |
+| Geocoding | Geocode addresses using a geocoding API |
+| Data Analysis | Analyze geospatial data, such as finding the centroid of a set of points |
 
 ## Installation
 
 To install GeoPyTools, follow these steps:
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/bantoinese83/GeoPyTools.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd GeoPyTools
-   ```
-3. Install the required dependencies:
-   ```
-   pip install .
-   ```
+| Step | Command |
+|------|---------|
+| Clone the repository | `git clone https://github.com/bantoinese83/GeoPyTools.git` |
+| Navigate to the project directory | `cd GeoPyTools` |
+| Install the required dependencies | `pip install .` |
 
 ## Quickstart Guide
 
@@ -132,6 +130,16 @@ print(f"The centroid of the points is {centroid}")
 ```
 
 ## API Reference
+
+| Function | Description |
+|----------|-------------|
+| `haversine_distance` | Calculate the distance between two points using the Haversine formula. |
+| `vincenty_distance` | Calculate the distance between two points using the Vincenty formula. |
+| `async_haversine_distance` | Asynchronously calculate the distance between two points using the Haversine formula. |
+| `async_vincenty_distance` | Asynchronously calculate the distance between two points using the Vincenty formula. |
+| `geocode_address` | Geocode an address using a geocoding API. |
+| `async_geocode_address` | Asynchronously geocode an address using a geocoding API. |
+| `calculate_centroid` | Find the centroid of a set of points. |
 
 ### `haversine_distance`
 
@@ -252,28 +260,6 @@ class Config:
 ### Overriding Default Configuration
 
 You can override the default configuration at runtime by setting the desired values in the `Config` class:
-
-```python
-from geopytools.config import Config
-
-Config.unit = "miles"
-Config.timeout = 20
-```
-
-## Using the `Config` Class
-
-The `Config` class allows you to customize the behavior of GeoPyTools by overriding default configurations. Here is a detailed description of the `Config` class and its attributes:
-
-### `Config` Class
-
-The `Config` class is used to configure various aspects of GeoPyTools. It has the following attributes:
-
-- `unit` (str): The unit of measurement for distances. The default value is "km".
-- `timeout` (int): The timeout value for API requests in seconds. The default value is 10 seconds.
-
-### Overriding Default Configurations
-
-You can override the default configurations by setting the desired values in the `Config` class. For example, to change the unit of measurement to miles and the timeout value to 20 seconds, you can do the following:
 
 ```python
 from geopytools.config import Config
