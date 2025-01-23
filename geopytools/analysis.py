@@ -1,8 +1,8 @@
 import numpy as np
 
-def find_centroid(points, batch_size=1000):
+def calculate_centroid(points, batch_size=1000):
     """
-    Find the centroid of a set of points.
+    Calculate the centroid of a set of points.
 
     Parameters:
     points (list): A list of tuples, where each tuple contains the latitude and longitude of a point.
