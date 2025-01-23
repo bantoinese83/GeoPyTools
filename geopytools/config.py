@@ -13,3 +13,26 @@ class Config:
     """
     unit = "km"
     timeout = 10
+
+    @classmethod
+    def update_config(cls, **kwargs):
+        """
+        Update configuration values at runtime.
+
+        Parameters:
+        kwargs (dict): A dictionary of configuration values to update.
+        """
+        for key, value in kwargs.items():
+            if hasattr(cls, key):
+                setattr(cls, key, value)
+
+    @classmethod
+    def reset_config(cls):
+        """
+        Reset configuration values to defaults.
+        """
+        cls.unit = DEFAULT_UNIT
+        cls.timeout = 10
+        cls.API_KEY = API_KEY
+        cls.OPENCAGE_API_KEY = OPENCAGE_API_KEY
+        cls.MAPQUEST_API_KEY = MAPQUEST_API_KEY
