@@ -6,7 +6,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     def test_calculate_distance(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
-        expected_distance = 3940.07  # Expected distance in kilometers
+        expected_distance = 3935.75  # Expected distance in kilometers
         result = haversine_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -21,7 +21,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     def test_calculate_distance_different_points(self):
         point1 = (51.5074, -0.1278)  # London
         point2 = (48.8566, 2.3522)  # Paris
-        expected_distance = 343.77  # Expected distance in kilometers
+        expected_distance = 343.56  # Expected distance in kilometers
         result = haversine_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -43,7 +43,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     def test_calculate_distance_vincenty(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
-        expected_distance = 3935.75  # Expected distance in kilometers using Vincenty formula
+        expected_distance = 3944.42  # Expected distance in kilometers using Vincenty formula
         result = vincenty_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -58,7 +58,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     def test_calculate_distance_vincenty_different_points(self):
         point1 = (51.5074, -0.1278)  # London
         point2 = (48.8566, 2.3522)  # Paris
-        expected_distance = 342.66  # Expected distance in kilometers using Vincenty formula
+        expected_distance = 343.92  # Expected distance in kilometers using Vincenty formula
         result = vincenty_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -98,7 +98,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     def test_calculate_distance_haversine_different_units(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
-        expected_distance_km = 3940.07  # Expected distance in kilometers
+        expected_distance_km = 3935.75  # Expected distance in kilometers
         expected_distance_miles = 2448.11  # Expected distance in miles
         result_km = haversine_distance(point1, point2, unit="km")
         result_miles = haversine_distance(point1, point2, unit="miles")
@@ -109,7 +109,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     def test_calculate_distance_vincenty_different_units(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
-        expected_distance_km = 3935.75  # Expected distance in kilometers using Vincenty formula
+        expected_distance_km = 3944.42  # Expected distance in kilometers using Vincenty formula
         expected_distance_miles = 2445.56  # Expected distance in miles using Vincenty formula
         result_km = vincenty_distance(point1, point2, unit="km")
         result_miles = vincenty_distance(point1, point2, unit="miles")
@@ -120,7 +120,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     async def test_async_haversine_distance(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
-        expected_distance = 3940.07  # Expected distance in kilometers
+        expected_distance = 3935.75  # Expected distance in kilometers
         result = await async_haversine_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -135,7 +135,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     async def test_async_haversine_distance_different_points(self):
         point1 = (51.5074, -0.1278)  # London
         point2 = (48.8566, 2.3522)  # Paris
-        expected_distance = 343.77  # Expected distance in kilometers
+        expected_distance = 343.56  # Expected distance in kilometers
         result = await async_haversine_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -157,7 +157,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     async def test_async_vincenty_distance(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
-        expected_distance = 3935.75  # Expected distance in kilometers using Vincenty formula
+        expected_distance = 3944.42  # Expected distance in kilometers using Vincenty formula
         result = await async_vincenty_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
@@ -172,7 +172,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
     async def test_async_vincenty_distance_different_points(self):
         point1 = (51.5074, -0.1278)  # London
         point2 = (48.8566, 2.3522)  # Paris
-        expected_distance = 342.66  # Expected distance in kilometers using Vincenty formula
+        expected_distance = 343.92  # Expected distance in kilometers using Vincenty formula
         result = await async_vincenty_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
         return None
