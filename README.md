@@ -248,7 +248,7 @@ The default configuration is defined in the `config.py` file:
 
 ```python
 DEFAULT_UNIT = "km"
-API_KEY = "your-default-api-key"
+GOOGLE_API_KEY = "your-default-api-key"
 OPENCAGE_API_KEY = "your-opencage-api-key"
 MAPQUEST_API_KEY = "your-mapquest-api-key"
 

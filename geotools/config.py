@@ -1,5 +1,5 @@
 DEFAULT_UNIT = "km"
-API_KEY = "your-default-api-key"
+GOOGLE_API_KEY = "your-default-api-key"
 OPENCAGE_API_KEY = "your-opencage-api-key"
 MAPQUEST_API_KEY = "your-mapquest-api-key"
 
@@ -10,13 +10,13 @@ class Config:
     Attributes:
     unit (str): The unit of measurement for distances (default is "km").
     timeout (int): The timeout value for API requests (default is 10 seconds).
-    API_KEY (str): The API key for Google Geocoding API.
+    GOOGLE_API_KEY (str): The API key for Google Geocoding API.
     OPENCAGE_API_KEY (str): The API key for OpenCage Geocoding API.
     MAPQUEST_API_KEY (str): The API key for MapQuest Geocoding API.
     """
     unit = "km"
     timeout = 10
-    API_KEY = API_KEY
+    GOOGLE_API_KEY = GOOGLE_API_KEY
     OPENCAGE_API_KEY = OPENCAGE_API_KEY
     MAPQUEST_API_KEY = MAPQUEST_API_KEY
 
@@ -39,6 +39,6 @@ class Config:
         """
         cls.unit = DEFAULT_UNIT
         cls.timeout = 10
-        cls.API_KEY = API_KEY
+        cls.GOOGLE_API_KEY = GOOGLE_API_KEY
         cls.OPENCAGE_API_KEY = OPENCAGE_API_KEY
         cls.MAPQUEST_API_KEY = MAPQUEST_API_KEY
