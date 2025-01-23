@@ -12,7 +12,7 @@ def calculate_centroid(points, batch_size=1000):
     tuple: The latitude and longitude of the centroid.
 
     Raises:
-    ValueError: If the points list is empty.
+    ValueError: If the points list is empty or contains invalid points.
     """
     if not points:
         raise ValueError("No points provided. Please provide a list of points.")
@@ -36,6 +36,10 @@ def calculate_centroid(points, batch_size=1000):
     total_points = 0
 
     for batch in batch_iterator(points, batch_size):
+        for point in batch:
+            if not isinstance(point, tuple) or len(point) != 2 or not all(isinstance(coord, (int, float)) for coord in point):
+                raise ValueError(f"Invalid point: {point}. Each point must be a tuple of two numeric values.")
+        
         latitudes = [point[0] for point in batch]
         longitudes = [point[1] for point in batch]
 
