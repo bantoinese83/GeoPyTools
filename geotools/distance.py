@@ -126,7 +126,7 @@ def vincenty_distance(point1, point2, unit=None):
         unit = Config.unit
 
     if unit == "miles":
-        distance *= 0.621371
+        distance *= 0.62137119
 
     return distance
 
