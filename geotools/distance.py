@@ -2,6 +2,7 @@ import math
 from geotools.config import Config
 from functools import lru_cache
 
+
 @lru_cache(maxsize=128)
 def haversine_distance(point1, point2, unit=None):
     """
@@ -19,9 +20,13 @@ def haversine_distance(point1, point2, unit=None):
     ValueError: If the coordinates are invalid.
     """
     if not (-90 <= point1[0] <= 90 and -180 <= point1[1] <= 180):
-        raise ValueError("Invalid coordinates for point1. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+        raise ValueError(
+            "Invalid coordinates for point1. Latitude must be between -90 and 90, and longitude must be between -180 and 180."
+        )
     if not (-90 <= point2[0] <= 90 and -180 <= point2[1] <= 180):
-        raise ValueError("Invalid coordinates for point2. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+        raise ValueError(
+            "Invalid coordinates for point2. Latitude must be between -90 and 90, and longitude must be between -180 and 180."
+        )
 
     lat1, lon1 = point1
     lat2, lon2 = point2
@@ -35,7 +40,10 @@ def haversine_distance(point1, point2, unit=None):
     # Haversine formula
     dlat = lat2 - lat1
     dlon = lon2 - lon1
-    a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+    a = (
+        math.sin(dlat / 2) ** 2
+        + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+    )
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
     # Radius of Earth in kilometers (mean radius)
@@ -51,6 +59,7 @@ def haversine_distance(point1, point2, unit=None):
         distance *= 0.621371
 
     return distance
+
 
 @lru_cache(maxsize=128)
 def vincenty_distance(point1, point2, unit=None):
@@ -69,9 +78,13 @@ def vincenty_distance(point1, point2, unit=None):
     ValueError: If the coordinates are invalid.
     """
     if not (-90 <= point1[0] <= 90 and -180 <= point1[1] <= 180):
-        raise ValueError("Invalid coordinates for point1. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+        raise ValueError(
+            "Invalid coordinates for point1. Latitude must be between -90 and 90, and longitude must be between -180 and 180."
+        )
     if not (-90 <= point2[0] <= 90 and -180 <= point2[1] <= 180):
-        raise ValueError("Invalid coordinates for point2. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+        raise ValueError(
+            "Invalid coordinates for point2. Latitude must be between -90 and 90, and longitude must be between -180 and 180."
+        )
 
     lat1, lon1 = point1
     lat2, lon2 = point2
@@ -100,24 +113,45 @@ def vincenty_distance(point1, point2, unit=None):
     for _ in range(1000):
         sinLambda = math.sin(Lambda)
         cosLambda = math.cos(Lambda)
-        sinSigma = math.sqrt((cosU2 * sinLambda) ** 2 + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) ** 2)
+        sinSigma = math.sqrt(
+            (cosU2 * sinLambda) ** 2 + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) ** 2
+        )
         if sinSigma == 0:
             return 0.0  # Points are coincident
         cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
         sigma = math.atan2(sinSigma, cosSigma)
         sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma
-        cos2Alpha = 1 - sinAlpha ** 2
+        cos2Alpha = 1 - sinAlpha**2
         cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cos2Alpha
         C = f / 16 * cos2Alpha * (4 + f * (4 - 3 * cos2Alpha))
         Lambda_prev = Lambda
-        Lambda = L + (1 - C) * f * sinAlpha * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM ** 2)))
+        Lambda = L + (1 - C) * f * sinAlpha * (
+            sigma
+            + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM**2))
+        )
         if abs(Lambda - Lambda_prev) < 1e-12:
             break
 
-    u2 = cos2Alpha * (a ** 2 - b ** 2) / (b ** 2)
+    u2 = cos2Alpha * (a**2 - b**2) / (b**2)
     A = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)))
     B = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)))
-    deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM ** 2) - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma ** 2) * (-3 + 4 * cos2SigmaM ** 2)))
+    deltaSigma = (
+        B
+        * sinSigma
+        * (
+            cos2SigmaM
+            + B
+            / 4
+            * (
+                cosSigma * (-1 + 2 * cos2SigmaM**2)
+                - B
+                / 6
+                * cos2SigmaM
+                * (-3 + 4 * sinSigma**2)
+                * (-3 + 4 * cos2SigmaM**2)
+            )
+        )
+    )
 
     # Calculate the distance
     distance = b * A * (sigma - deltaSigma) / 1000  # Convert meters to kilometers
@@ -129,6 +163,7 @@ def vincenty_distance(point1, point2, unit=None):
         distance *= 0.62137119
 
     return distance
+
 
 async def async_haversine_distance(point1, point2, unit=None):
     """
@@ -146,6 +181,7 @@ async def async_haversine_distance(point1, point2, unit=None):
     ValueError: If the coordinates are invalid.
     """
     return haversine_distance(point1, point2, unit)
+
 
 async def async_vincenty_distance(point1, point2, unit=None):
     """

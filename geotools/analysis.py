@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def batch_iterator(data, size):
     """
     Generate batches of data for processing.
@@ -13,7 +14,7 @@ def batch_iterator(data, size):
     """
     if isinstance(data, list):
         for i in range(0, len(data), size):
-            yield data[i:i + size]
+            yield data[i : i + size]
     else:
         batch = []
         for item in data:
@@ -23,6 +24,7 @@ def batch_iterator(data, size):
                 batch = []
         if batch:
             yield batch
+
 
 def calculate_centroid(points, batch_size=1000):
     """
@@ -47,9 +49,15 @@ def calculate_centroid(points, batch_size=1000):
 
     for batch in batch_iterator(points, batch_size):
         for point in batch:
-            if not isinstance(point, tuple) or len(point) != 2 or not all(isinstance(coord, (int, float)) for coord in point):
-                raise ValueError(f"Invalid point: {point}. Each point must be a tuple of two numeric values.")
-        
+            if (
+                not isinstance(point, tuple)
+                or len(point) != 2
+                or not all(isinstance(coord, (int, float)) for coord in point)
+            ):
+                raise ValueError(
+                    f"Invalid point: {point}. Each point must be a tuple of two numeric values."
+                )
+
         latitudes = [point[0] for point in batch]
         longitudes = [point[1] for point in batch]
 

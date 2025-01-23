@@ -5,6 +5,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "your-default-api-key")
 OPENCAGE_API_KEY = os.getenv("OPENCAGE_API_KEY", "your-opencage-api-key")
 MAPQUEST_API_KEY = os.getenv("MAPQUEST_API_KEY", "your-mapquest-api-key")
 
+
 class Config:
     """
     Configuration class for GeoPyTools.
@@ -16,6 +17,7 @@ class Config:
     OPENCAGE_API_KEY (str): The API key for OpenCage Geocoding API.
     MAPQUEST_API_KEY (str): The API key for MapQuest Geocoding API.
     """
+
     unit = "km"
     timeout = 10
     GOOGLE_API_KEY = GOOGLE_API_KEY

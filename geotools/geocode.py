@@ -2,6 +2,7 @@ import requests
 from geotools.config import Config
 from functools import lru_cache
 
+
 @lru_cache(maxsize=128)
 def geocode_address(address, api="google", api_key=None):
     """
@@ -20,37 +21,34 @@ def geocode_address(address, api="google", api_key=None):
     """
     if api == "google":
         api_url = "https://maps.googleapis.com/maps/api/geocode/json"
-        params = {
-            "address": address,
-            "key": api_key or Config.GOOGLE_API_KEY
-        }
+        params = {"address": address, "key": api_key or Config.GOOGLE_API_KEY}
     elif api == "opencage":
         api_url = "https://api.opencagedata.com/geocode/v1/json"
-        params = {
-            "q": address,
-            "key": api_key or Config.OPENCAGE_API_KEY
-        }
+        params = {"q": address, "key": api_key or Config.OPENCAGE_API_KEY}
     elif api == "mapquest":
         api_url = "http://www.mapquestapi.com/geocoding/v1/address"
-        params = {
-            "location": address,
-            "key": api_key or Config.MAPQUEST_API_KEY
-        }
+        params = {"location": address, "key": api_key or Config.MAPQUEST_API_KEY}
     else:
-        raise ValueError("Unsupported API. Please use 'google', 'opencage', or 'mapquest'.")
+        raise ValueError(
+            "Unsupported API. Please use 'google', 'opencage', or 'mapquest'."
+        )
 
     response = requests.get(api_url, params=params)
-    
+
     try:
         data = response.json()
     except requests.exceptions.JSONDecodeError:
-        raise ValueError("Response could not be decoded. The response is empty or invalid.")
+        raise ValueError(
+            "Response could not be decoded. The response is empty or invalid."
+        )
 
     if api == "google":
         if data["status"] == "REQUEST_DENIED":
             raise ValueError("Invalid API key. Please provide a valid API key.")
         elif data["status"] == "ZERO_RESULTS":
-            raise ValueError("Unsupported address format. Please provide a valid address.")
+            raise ValueError(
+                "Unsupported address format. Please provide a valid address."
+            )
         elif data["status"] == "OK":
             location = data["results"][0]["geometry"]["location"]
             return location["lat"], location["lng"]
@@ -60,7 +58,9 @@ def geocode_address(address, api="google", api_key=None):
         if data["status"]["code"] == 403:
             raise ValueError("Invalid API key. Please provide a valid API key.")
         elif data["status"]["code"] == 404:
-            raise ValueError("Unsupported address format. Please provide a valid address.")
+            raise ValueError(
+                "Unsupported address format. Please provide a valid address."
+            )
         elif data["status"]["code"] == 200:
             location = data["results"][0]["geometry"]
             return location["lat"], location["lng"]
@@ -74,6 +74,7 @@ def geocode_address(address, api="google", api_key=None):
             return location["lat"], location["lng"]
         else:
             raise Exception("Geocoding API error: " + str(data["info"]["statuscode"]))
+
 
 async def async_geocode_address(address, api="google", api_key=None):
     """

@@ -7,7 +7,7 @@ name = "geopytools"
 version = "1.0.0"
 description = "A Python package for geospatial tools"
 authors = [
-    { name = "Your Name", email = "youremail@example.com" }
+    { name = "Bryan Antoine", email = "b.antoine.se@gmail.com" }
 ]
 dependencies = [
     "numpy",
@@ -26,7 +26,6 @@ python_requires = ">=3.6"
 line-length = 88
 target-version = ["py36", "py37", "py38", "py39", "py310", "py311"]
 
-
 [tool.flake8]
 max-line-length = 88
-extend-ignore = E203, W503
+extend-ignore = ["E203", "W503"]

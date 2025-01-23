@@ -2,8 +2,8 @@ import unittest
 import os
 from geotools.config import Config
 
-class TestConfig(unittest.TestCase):
 
+class TestConfig(unittest.TestCase):
     def setUp(self):
         self.original_google_api_key = os.getenv("GOOGLE_API_KEY")
         self.original_opencage_api_key = os.getenv("OPENCAGE_API_KEY")
@@ -42,5 +42,6 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(Config.OPENCAGE_API_KEY, "your-opencage-api-key")
         self.assertEqual(Config.MAPQUEST_API_KEY, "your-mapquest-api-key")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
