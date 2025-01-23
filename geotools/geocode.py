@@ -39,7 +39,11 @@ def geocode_address(address, api="google"):
         raise ValueError("Unsupported API. Please use 'google', 'opencage', or 'mapquest'.")
 
     response = requests.get(api_url, params=params)
-    data = response.json()
+    
+    try:
+        data = response.json()
+    except requests.exceptions.JSONDecodeError:
+        raise ValueError("Response could not be decoded. The response is empty or invalid.")
 
     if api == "google":
         if data["status"] == "REQUEST_DENIED":
