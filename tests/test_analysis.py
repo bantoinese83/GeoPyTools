@@ -56,5 +56,12 @@ class TestFindCentroid(unittest.TestCase):
         result_batches = list(batch_iterator(data, batch_size))
         self.assertEqual(result_batches, expected_batches)
 
+    def test_find_centroid_valid_points_batch_processing(self):
+        points = [(i, i) for i in range(10000)]  # Large dataset
+        result = calculate_centroid(points, batch_size=1000)
+        expected_centroid = (4999.5, 4999.5)  # Expected centroid coordinates
+        self.assertAlmostEqual(result[0], expected_centroid[0], places=5)
+        self.assertAlmostEqual(result[1], expected_centroid[1], places=5)
+
 if __name__ == '__main__':
     unittest.main()
