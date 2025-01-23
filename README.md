@@ -37,24 +37,24 @@ Here are some examples of how to use GeoPyTools:
 ### Calculate Distance
 
 ```python
-from geopytools.distance import calculate_distance
+from geopytools.distance import haversine_distance
 
 point1 = (40.7128, -74.0060)  # New York City
 point2 = (34.0522, -118.2437)  # Los Angeles
 
-distance = calculate_distance(point1, point2)
+distance = haversine_distance(point1, point2)
 print(f"The distance between New York City and Los Angeles is {distance} km")
 ```
 
 ### Calculate Distance using Vincenty formula
 
 ```python
-from geopytools.distance import calculate_distance_vincenty
+from geopytools.distance import vincenty_distance
 
 point1 = (40.7128, -74.0060)  # New York City
 point2 = (34.0522, -118.2437)  # Los Angeles
 
-distance = calculate_distance_vincenty(point1, point2)
+distance = vincenty_distance(point1, point2)
 print(f"The distance between New York City and Los Angeles using Vincenty formula is {distance} km")
 ```
 
@@ -71,16 +71,16 @@ print(f"The coordinates of the address are {location}")
 ### Analyze Geospatial Data
 
 ```python
-from geopytools.analysis import find_centroid
+from geopytools.analysis import calculate_centroid
 
 points = [(40.7128, -74.0060), (34.0522, -118.2437), (41.8781, -87.6298)]  # NYC, LA, Chicago
-centroid = find_centroid(points)
+centroid = calculate_centroid(points)
 print(f"The centroid of the points is {centroid}")
 ```
 
 ## API Reference
 
-### `calculate_distance`
+### `haversine_distance`
 
 Calculate the distance between two points using the Haversine formula.
 
@@ -94,7 +94,7 @@ Calculate the distance between two points using the Haversine formula.
 **Raises:**
 - `ValueError`: If the coordinates are invalid.
 
-### `calculate_distance_vincenty`
+### `vincenty_distance`
 
 Calculate the distance between two points using the Vincenty formula.
 
@@ -121,7 +121,7 @@ Geocode an address using a geocoding API.
 **Raises:**
 - `ValueError`: If the API key is invalid or the address format is unsupported.
 
-### `find_centroid`
+### `calculate_centroid`
 
 Find the centroid of a set of points.
 
