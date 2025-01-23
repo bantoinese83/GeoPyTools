@@ -1,2 +1,1 @@
-# GeoPyTools
-A utility to calculate distances, geocode addresses, and analyze geospatial data easily
+This repository is empty. Any task executed on it should be considered a new capability and needs to be created.
