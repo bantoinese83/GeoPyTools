@@ -33,3 +33,18 @@ def geocode_address(address):
         return location["lat"], location["lng"]
     else:
         raise Exception("Geocoding API error: " + data["status"])
+
+async def async_geocode_address(address):
+    """
+    Asynchronously geocode an address using a geocoding API.
+
+    Parameters:
+    address (str): The address to geocode.
+
+    Returns:
+    tuple: The latitude and longitude of the address.
+
+    Raises:
+    ValueError: If the API key is invalid or the address format is unsupported.
+    """
+    return geocode_address(address)

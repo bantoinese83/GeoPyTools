@@ -58,6 +58,25 @@ distance = vincenty_distance(point1, point2)
 print(f"The distance between New York City and Los Angeles using Vincenty formula is {distance} km")
 ```
 
+### Calculate Distance Asynchronously
+
+```python
+import asyncio
+from geopytools.distance import async_haversine_distance, async_vincenty_distance
+
+async def main():
+    point1 = (40.7128, -74.0060)  # New York City
+    point2 = (34.0522, -118.2437)  # Los Angeles
+
+    distance_haversine = await async_haversine_distance(point1, point2)
+    print(f"The distance between New York City and Los Angeles using Haversine formula is {distance_haversine} km")
+
+    distance_vincenty = await async_vincenty_distance(point1, point2)
+    print(f"The distance between New York City and Los Angeles using Vincenty formula is {distance_vincenty} km")
+
+asyncio.run(main())
+```
+
 ### Geocode Address
 
 ```python
@@ -66,6 +85,20 @@ from geopytools.geocode import geocode_address
 address = "1600 Amphitheatre Parkway, Mountain View, CA"
 location = geocode_address(address)
 print(f"The coordinates of the address are {location}")
+```
+
+### Geocode Address Asynchronously
+
+```python
+import asyncio
+from geopytools.geocode import async_geocode_address
+
+async def main():
+    address = "1600 Amphitheatre Parkway, Mountain View, CA"
+    location = await async_geocode_address(address)
+    print(f"The coordinates of the address are {location}")
+
+asyncio.run(main())
 ```
 
 ### Analyze Geospatial Data
@@ -108,9 +141,50 @@ Calculate the distance between two points using the Vincenty formula.
 **Raises:**
 - `ValueError`: If the coordinates are invalid.
 
+### `async_haversine_distance`
+
+Asynchronously calculate the distance between two points using the Haversine formula.
+
+**Parameters:**
+- `point1` (tuple): The latitude and longitude of the first point.
+- `point2` (tuple): The latitude and longitude of the second point.
+
+**Returns:**
+- `float`: The distance between the two points in kilometers.
+
+**Raises:**
+- `ValueError`: If the coordinates are invalid.
+
+### `async_vincenty_distance`
+
+Asynchronously calculate the distance between two points using the Vincenty formula.
+
+**Parameters:**
+- `point1` (tuple): The latitude and longitude of the first point.
+- `point2` (tuple): The latitude and longitude of the second point.
+
+**Returns:**
+- `float`: The distance between the two points in kilometers.
+
+**Raises:**
+- `ValueError`: If the coordinates are invalid.
+
 ### `geocode_address`
 
 Geocode an address using a geocoding API.
+
+**Parameters:**
+- `address` (str): The address to geocode.
+
+**Returns:**
+- `tuple`: The latitude and longitude of the address.
+
+**Raises:**
+- `ValueError`: If the API key is invalid or the address format is unsupported.
+
+### `async_geocode_address`
+
+Asynchronously geocode an address using a geocoding API.
 
 **Parameters:**
 - `address` (str): The address to geocode.

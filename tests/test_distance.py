@@ -1,5 +1,5 @@
 import unittest
-from geopytools.distance import haversine_distance, vincenty_distance
+from geopytools.distance import haversine_distance, vincenty_distance, async_haversine_distance, async_vincenty_distance
 
 class TestCalculateDistance(unittest.TestCase):
 
@@ -104,6 +104,20 @@ class TestCalculateDistance(unittest.TestCase):
         result_miles = vincenty_distance(point1, point2, unit="miles")
         self.assertAlmostEqual(result_km, expected_distance_km, places=2)
         self.assertAlmostEqual(result_miles, expected_distance_miles, places=2)
+
+    async def test_async_haversine_distance(self):
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        expected_distance = 3940.07  # Expected distance in kilometers
+        result = await async_haversine_distance(point1, point2)
+        self.assertAlmostEqual(result, expected_distance, places=2)
+
+    async def test_async_vincenty_distance(self):
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        expected_distance = 3935.75  # Expected distance in kilometers using Vincenty formula
+        result = await async_vincenty_distance(point1, point2)
+        self.assertAlmostEqual(result, expected_distance, places=2)
 
 if __name__ == '__main__':
     unittest.main()
