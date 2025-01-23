@@ -5,7 +5,7 @@ class TestFindCentroid(unittest.TestCase):
 
     def test_find_centroid(self):
         points = [(40.7128, -74.0060), (34.0522, -118.2437), (41.8781, -87.6298)]  # NYC, LA, Chicago
-        expected_centroid = (38.881033333333335, -93.95983333333334)  # Expected centroid coordinates
+        expected_centroid = (38.881033333333335, -93.29316666666666)  # Expected centroid coordinates
         result = calculate_centroid(points)
         self.assertAlmostEqual(result[0], expected_centroid[0], places=5)
         self.assertAlmostEqual(result[1], expected_centroid[1], places=5)
