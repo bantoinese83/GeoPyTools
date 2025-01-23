@@ -11,9 +11,15 @@ class TestGeocodeAddress(unittest.TestCase):
 
     def test_geocode_address_invalid(self):
         address = "Invalid Address"
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(ValueError) as context:
             geocode_address(address)
-        self.assertIn("Geocoding API error", str(context.exception))
+        self.assertIn("Unsupported address format", str(context.exception))
+
+    def test_geocode_address_invalid_api_key(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        with self.assertRaises(ValueError) as context:
+            geocode_address(address)
+        self.assertIn("Invalid API key", str(context.exception))
 
 if __name__ == '__main__':
     unittest.main()

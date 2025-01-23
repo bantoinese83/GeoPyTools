@@ -23,5 +23,11 @@ class TestFindCentroid(unittest.TestCase):
             find_centroid(points)
         self.assertIn("No points provided", str(context.exception))
 
+    def test_find_centroid_invalid_points(self):
+        points = [(40.7128, -74.0060), (34.0522, 'invalid'), (41.8781, -87.6298)]  # NYC, LA (invalid), Chicago
+        with self.assertRaises(ValueError) as context:
+            find_centroid(points)
+        self.assertIn("Invalid point", str(context.exception))
+
 if __name__ == '__main__':
     unittest.main()

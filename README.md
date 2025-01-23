@@ -2,6 +2,10 @@
 
 GeoPyTools is a utility to calculate distances, geocode addresses, and analyze geospatial data easily. It provides a set of tools for geospatial analysis, including distance calculations, geocoding, and data analysis.
 
+## Purpose
+
+GeoPyTools aims to provide a comprehensive set of tools for geospatial analysis, allowing users to calculate distances, geocode addresses, and analyze geospatial data with ease. The package is designed to be modular, extensible, and user-friendly, enabling users to mix and match the components they need without unnecessary overhead.
+
 ## Features
 
 - Calculate distances between two points using the Haversine formula
@@ -26,7 +30,7 @@ To install GeoPyTools, follow these steps:
    pip install -r requirements.txt
    ```
 
-## Usage
+## Quickstart Guide
 
 Here are some examples of how to use GeoPyTools:
 
@@ -74,6 +78,70 @@ centroid = find_centroid(points)
 print(f"The centroid of the points is {centroid}")
 ```
 
+## API Reference
+
+### `calculate_distance`
+
+Calculate the distance between two points using the Haversine formula.
+
+**Parameters:**
+- `point1` (tuple): The latitude and longitude of the first point.
+- `point2` (tuple): The latitude and longitude of the second point.
+
+**Returns:**
+- `float`: The distance between the two points in kilometers.
+
+**Raises:**
+- `ValueError`: If the coordinates are invalid.
+
+### `calculate_distance_vincenty`
+
+Calculate the distance between two points using the Vincenty formula.
+
+**Parameters:**
+- `point1` (tuple): The latitude and longitude of the first point.
+- `point2` (tuple): The latitude and longitude of the second point.
+
+**Returns:**
+- `float`: The distance between the two points in kilometers.
+
+**Raises:**
+- `ValueError`: If the coordinates are invalid.
+
+### `geocode_address`
+
+Geocode an address using a geocoding API.
+
+**Parameters:**
+- `address` (str): The address to geocode.
+
+**Returns:**
+- `tuple`: The latitude and longitude of the address.
+
+**Raises:**
+- `ValueError`: If the API key is invalid or the address format is unsupported.
+
+### `find_centroid`
+
+Find the centroid of a set of points.
+
+**Parameters:**
+- `points` (list): A list of tuples, where each tuple contains the latitude and longitude of a point.
+
+**Returns:**
+- `tuple`: The latitude and longitude of the centroid.
+
+**Raises:**
+- `ValueError`: If the points list is empty.
+
+## Versioning and Changelogs
+
+GeoPyTools follows Semantic Versioning. Here are the versioning details:
+
+- **1.0.0**: Initial stable release.
+- **1.1.0**: Minor updates (new features).
+- **1.1.1**: Bug fixes or patches.
+
 ## Contributing
 
 We welcome contributions to GeoPyTools! If you would like to contribute, please follow these guidelines:
@@ -81,6 +149,15 @@ We welcome contributions to GeoPyTools! If you would like to contribute, please 
 1. Fork the repository and create a new branch for your feature or bugfix.
 2. Write tests for your changes and ensure all tests pass.
 3. Submit a pull request with a clear description of your changes.
+
+## Roadmap
+
+We have a roadmap to let users know what's planned next. Here are some of the upcoming features:
+
+- Support for additional geocoding APIs
+- Asynchronous versions of functions
+- Performance optimizations for bulk calculations
+- Real-life examples and use-case scenarios
 
 ## License
 

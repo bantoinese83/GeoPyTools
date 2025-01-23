@@ -23,6 +23,19 @@ class TestCalculateDistance(unittest.TestCase):
         result = calculate_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
 
+    def test_calculate_distance_invalid_coordinates(self):
+        point1 = (91.0, -74.0060)  # Invalid latitude
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        with self.assertRaises(ValueError) as context:
+            calculate_distance(point1, point2)
+        self.assertIn("Invalid coordinates for point1", str(context.exception))
+
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -190.2437)  # Invalid longitude
+        with self.assertRaises(ValueError) as context:
+            calculate_distance(point1, point2)
+        self.assertIn("Invalid coordinates for point2", str(context.exception))
+
     def test_calculate_distance_vincenty(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
@@ -42,6 +55,19 @@ class TestCalculateDistance(unittest.TestCase):
         expected_distance = 342.66  # Expected distance in kilometers using Vincenty formula
         result = calculate_distance_vincenty(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
+
+    def test_calculate_distance_vincenty_invalid_coordinates(self):
+        point1 = (91.0, -74.0060)  # Invalid latitude
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        with self.assertRaises(ValueError) as context:
+            calculate_distance_vincenty(point1, point2)
+        self.assertIn("Invalid coordinates for point1", str(context.exception))
+
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -190.2437)  # Invalid longitude
+        with self.assertRaises(ValueError) as context:
+            calculate_distance_vincenty(point1, point2)
+        self.assertIn("Invalid coordinates for point2", str(context.exception))
 
 if __name__ == '__main__':
     unittest.main()

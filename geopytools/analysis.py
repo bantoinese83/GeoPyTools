@@ -9,7 +9,13 @@ def find_centroid(points):
 
     Returns:
     tuple: The latitude and longitude of the centroid.
+
+    Raises:
+    ValueError: If the points list is empty.
     """
+    if not points:
+        raise ValueError("No points provided. Please provide a list of points.")
+
     latitudes = [point[0] for point in points]
     longitudes = [point[1] for point in points]
 
