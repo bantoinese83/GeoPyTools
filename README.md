@@ -5,6 +5,7 @@ GeoPyTools is a utility to calculate distances, geocode addresses, and analyze g
 ## Features
 
 - Calculate distances between two points using the Haversine formula
+- Calculate distances between two points using the Vincenty formula
 - Geocode addresses using a geocoding API
 - Analyze geospatial data, such as finding the centroid of a set of points
 
@@ -39,6 +40,18 @@ point2 = (34.0522, -118.2437)  # Los Angeles
 
 distance = calculate_distance(point1, point2)
 print(f"The distance between New York City and Los Angeles is {distance} km")
+```
+
+### Calculate Distance using Vincenty formula
+
+```python
+from geopytools.distance import calculate_distance_vincenty
+
+point1 = (40.7128, -74.0060)  # New York City
+point2 = (34.0522, -118.2437)  # Los Angeles
+
+distance = calculate_distance_vincenty(point1, point2)
+print(f"The distance between New York City and Los Angeles using Vincenty formula is {distance} km")
 ```
 
 ### Geocode Address
