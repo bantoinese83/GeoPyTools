@@ -110,7 +110,7 @@ class TestCalculateDistance(unittest.IsolatedAsyncioTestCase):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
         expected_distance_km = 3944.42  # Expected distance in kilometers using Vincenty formula
-        expected_distance_miles = 2445.95  # Expected distance in miles using Vincenty formula
+        expected_distance_miles = 2450.95  # Expected distance in miles using Vincenty formula
         result_km = vincenty_distance(point1, point2, unit="km")
         result_miles = vincenty_distance(point1, point2, unit="miles")
         self.assertAlmostEqual(result_km, expected_distance_km, places=2)
