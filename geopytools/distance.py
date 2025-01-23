@@ -10,7 +10,15 @@ def calculate_distance(point1, point2):
 
     Returns:
     float: The distance between the two points in kilometers.
+
+    Raises:
+    ValueError: If the coordinates are invalid.
     """
+    if not (-90 <= point1[0] <= 90 and -180 <= point1[1] <= 180):
+        raise ValueError("Invalid coordinates for point1. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+    if not (-90 <= point2[0] <= 90 and -180 <= point2[1] <= 180):
+        raise ValueError("Invalid coordinates for point2. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+
     lat1, lon1 = point1
     lat2, lon2 = point2
 
@@ -44,7 +52,15 @@ def calculate_distance_vincenty(point1, point2):
 
     Returns:
     float: The distance between the two points in kilometers.
+
+    Raises:
+    ValueError: If the coordinates are invalid.
     """
+    if not (-90 <= point1[0] <= 90 and -180 <= point1[1] <= 180):
+        raise ValueError("Invalid coordinates for point1. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+    if not (-90 <= point2[0] <= 90 and -180 <= point2[1] <= 180):
+        raise ValueError("Invalid coordinates for point2. Latitude must be between -90 and 90, and longitude must be between -180 and 180.")
+
     lat1, lon1 = point1
     lat2, lon2 = point2
 
