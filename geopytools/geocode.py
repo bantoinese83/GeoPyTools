@@ -1,4 +1,5 @@
 import requests
+from geopytools.config import API_KEY
 
 def geocode_address(address):
     """
@@ -16,7 +17,7 @@ def geocode_address(address):
     api_url = "https://maps.googleapis.com/maps/api/geocode/json"
     params = {
         "address": address,
-        "key": "YOUR_API_KEY"
+        "key": API_KEY
     }
     response = requests.get(api_url, params=params)
     data = response.json()
