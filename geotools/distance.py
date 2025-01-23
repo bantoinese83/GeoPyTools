@@ -101,6 +101,8 @@ def vincenty_distance(point1, point2, unit=None):
         sinLambda = math.sin(Lambda)
         cosLambda = math.cos(Lambda)
         sinSigma = math.sqrt((cosU2 * sinLambda) ** 2 + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) ** 2)
+        if sinSigma == 0:
+            return 0.0  # Points are coincident
         cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
         sigma = math.atan2(sinSigma, cosSigma)
         sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma

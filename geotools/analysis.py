@@ -5,7 +5,7 @@ def calculate_centroid(points, batch_size=1000):
     Calculate the centroid of a set of points.
 
     Parameters:
-    points (list): A list of tuples, where each tuple contains the latitude and longitude of a point.
+    points (list or generator): A list or generator of tuples, where each tuple contains the latitude and longitude of a point.
     batch_size (int): The size of each batch for processing large inputs.
 
     Returns:
@@ -22,14 +22,24 @@ def calculate_centroid(points, batch_size=1000):
         Generate batches of data for processing.
 
         Parameters:
-        data (list): The data to be processed in batches.
+        data (list or generator): The data to be processed in batches.
         size (int): The size of each batch.
 
         Yields:
         list: A batch of data.
         """
-        for i in range(0, len(data), size):
-            yield data[i:i + size]
+        if isinstance(data, list):
+            for i in range(0, len(data), size):
+                yield data[i:i + size]
+        else:
+            batch = []
+            for item in data:
+                batch.append(item)
+                if len(batch) == size:
+                    yield batch
+                    batch = []
+            if batch:
+                yield batch
 
     total_latitude = 0
     total_longitude = 0
