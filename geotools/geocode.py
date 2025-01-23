@@ -21,7 +21,7 @@ def geocode_address(address, api="google"):
         api_url = "https://maps.googleapis.com/maps/api/geocode/json"
         params = {
             "address": address,
-            "key": Config.API_KEY
+            "key": Config.GOOGLE_API_KEY
         }
     elif api == "opencage":
         api_url = "https://api.opencagedata.com/geocode/v1/json"
