@@ -18,6 +18,16 @@ def calculate_centroid(points, batch_size=1000):
         raise ValueError("No points provided. Please provide a list of points.")
 
     def batch_iterator(data, size):
+        """
+        Generate batches of data for processing.
+
+        Parameters:
+        data (list): The data to be processed in batches.
+        size (int): The size of each batch.
+
+        Yields:
+        list: A batch of data.
+        """
         for i in range(0, len(data), size):
             yield data[i:i + size]
 

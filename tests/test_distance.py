@@ -85,5 +85,25 @@ class TestCalculateDistance(unittest.TestCase):
         self.assertEqual(result1, result2)
         self.assertIs(result1, result2)
 
+    def test_calculate_distance_haversine_different_units(self):
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        expected_distance_km = 3940.07  # Expected distance in kilometers
+        expected_distance_miles = 2448.11  # Expected distance in miles
+        result_km = haversine_distance(point1, point2, unit="km")
+        result_miles = haversine_distance(point1, point2, unit="miles")
+        self.assertAlmostEqual(result_km, expected_distance_km, places=2)
+        self.assertAlmostEqual(result_miles, expected_distance_miles, places=2)
+
+    def test_calculate_distance_vincenty_different_units(self):
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        expected_distance_km = 3935.75  # Expected distance in kilometers using Vincenty formula
+        expected_distance_miles = 2445.56  # Expected distance in miles using Vincenty formula
+        result_km = vincenty_distance(point1, point2, unit="km")
+        result_miles = vincenty_distance(point1, point2, unit="miles")
+        self.assertAlmostEqual(result_km, expected_distance_km, places=2)
+        self.assertAlmostEqual(result_miles, expected_distance_miles, places=2)
+
 if __name__ == '__main__':
     unittest.main()

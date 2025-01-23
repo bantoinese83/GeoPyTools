@@ -27,7 +27,7 @@ To install GeoPyTools, follow these steps:
    ```
 3. Install the required dependencies:
    ```
-   pip install -r requirements.txt
+   pip install .
    ```
 
 ## Quickstart Guide

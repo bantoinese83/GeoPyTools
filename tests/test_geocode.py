@@ -28,5 +28,12 @@ class TestGeocodeAddress(unittest.TestCase):
         self.assertEqual(result1, result2)
         self.assertIs(result1, result2)
 
+    def test_geocode_address_valid_api_key(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        valid_api_key = "your-valid-api-key"
+        expected_location = (37.4224764, -122.0842499)  # Expected coordinates
+        result = geocode_address(address, api_key=valid_api_key)
+        self.assertEqual(result, expected_location)
+
 if __name__ == '__main__':
     unittest.main()

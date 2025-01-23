@@ -43,5 +43,18 @@ class TestFindCentroid(unittest.TestCase):
         self.assertAlmostEqual(result[0], expected_centroid[0], places=5)
         self.assertAlmostEqual(result[1], expected_centroid[1], places=5)
 
+    def test_batch_iterator(self):
+        from geopytools.analysis import batch_iterator
+        data = list(range(10))
+        batch_size = 3
+        expected_batches = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [9]
+        ]
+        result_batches = list(batch_iterator(data, batch_size))
+        self.assertEqual(result_batches, expected_batches)
+
 if __name__ == '__main__':
     unittest.main()
