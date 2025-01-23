@@ -1,5 +1,5 @@
 import unittest
-from geopytools.geocode import geocode_address
+from geopytools.geocode import geocode_address, async_geocode_address
 
 class TestGeocodeAddress(unittest.TestCase):
 
@@ -33,6 +33,38 @@ class TestGeocodeAddress(unittest.TestCase):
         valid_api_key = "your-valid-api-key"
         expected_location = (37.4224764, -122.0842499)  # Expected coordinates
         result = geocode_address(address, api_key=valid_api_key)
+        self.assertEqual(result, expected_location)
+
+    async def test_async_geocode_address_valid(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        expected_location = (37.4224764, -122.0842499)  # Expected coordinates
+        result = await async_geocode_address(address)
+        self.assertEqual(result, expected_location)
+
+    async def test_async_geocode_address_invalid(self):
+        address = "Invalid Address"
+        with self.assertRaises(ValueError) as context:
+            await async_geocode_address(address)
+        self.assertIn("Unsupported address format", str(context.exception))
+
+    async def test_async_geocode_address_invalid_api_key(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        with self.assertRaises(ValueError) as context:
+            await async_geocode_address(address)
+        self.assertIn("Invalid API key", str(context.exception))
+
+    async def test_async_geocode_address_caching(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        result1 = await async_geocode_address(address)
+        result2 = await async_geocode_address(address)
+        self.assertEqual(result1, result2)
+        self.assertIs(result1, result2)
+
+    async def test_async_geocode_address_valid_api_key(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        valid_api_key = "your-valid-api-key"
+        expected_location = (37.4224764, -122.0842499)  # Expected coordinates
+        result = await async_geocode_address(address, api_key=valid_api_key)
         self.assertEqual(result, expected_location)
 
 if __name__ == '__main__':
