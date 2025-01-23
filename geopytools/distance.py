@@ -1,6 +1,8 @@
 import math
 from geopytools.config import DEFAULT_UNIT
+from functools import lru_cache
 
+@lru_cache(maxsize=128)
 def calculate_distance(point1, point2, unit=DEFAULT_UNIT):
     """
     Calculate the distance between two points using the Haversine formula.
@@ -47,6 +49,7 @@ def calculate_distance(point1, point2, unit=DEFAULT_UNIT):
 
     return distance
 
+@lru_cache(maxsize=128)
 def calculate_distance_vincenty(point1, point2, unit=DEFAULT_UNIT):
     """
     Calculate the distance between two points using the Vincenty formula.

@@ -1,6 +1,8 @@
 import requests
 from geopytools.config import API_KEY
+from functools import lru_cache
 
+@lru_cache(maxsize=128)
 def geocode_address(address):
     """
     Geocode an address using a geocoding API.

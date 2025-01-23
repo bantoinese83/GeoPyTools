@@ -29,5 +29,19 @@ class TestFindCentroid(unittest.TestCase):
             find_centroid(points)
         self.assertIn("Invalid point", str(context.exception))
 
+    def test_find_centroid_batch_processing(self):
+        points = [(i, i) for i in range(10000)]  # Large dataset
+        result = find_centroid(points, batch_size=1000)
+        expected_centroid = (4999.5, 4999.5)  # Expected centroid coordinates
+        self.assertAlmostEqual(result[0], expected_centroid[0], places=5)
+        self.assertAlmostEqual(result[1], expected_centroid[1], places=5)
+
+    def test_find_centroid_iterators(self):
+        points = ((i, i) for i in range(10000))  # Large dataset using generator
+        result = find_centroid(points, batch_size=1000)
+        expected_centroid = (4999.5, 4999.5)  # Expected centroid coordinates
+        self.assertAlmostEqual(result[0], expected_centroid[0], places=5)
+        self.assertAlmostEqual(result[1], expected_centroid[1], places=5)
+
 if __name__ == '__main__':
     unittest.main()
