@@ -47,6 +47,12 @@ class TestGeocodeAddress(unittest.TestCase):
         result = geocode_address(address, api="mapquest")
         self.assertEqual(result, expected_location)
 
+    def test_geocode_address_mapquest_json_decode_error(self):
+        address = "Invalid Address"
+        with self.assertRaises(ValueError) as context:
+            geocode_address(address, api="mapquest")
+        self.assertIn("Response could not be decoded", str(context.exception))
+
     async def test_async_geocode_address_valid(self):
         address = "1600 Amphitheatre Parkway, Mountain View, CA"
         expected_location = (37.4224764, -122.0842499)  # Expected coordinates
