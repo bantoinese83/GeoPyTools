@@ -1,15 +1,17 @@
 import math
+from geopytools.config import DEFAULT_UNIT
 
-def calculate_distance(point1, point2):
+def calculate_distance(point1, point2, unit=DEFAULT_UNIT):
     """
     Calculate the distance between two points using the Haversine formula.
 
     Parameters:
     point1 (tuple): The latitude and longitude of the first point.
     point2 (tuple): The latitude and longitude of the second point.
+    unit (str): The unit of measurement for the distance (default is "km").
 
     Returns:
-    float: The distance between the two points in kilometers.
+    float: The distance between the two points in the specified unit.
 
     Raises:
     ValueError: If the coordinates are invalid.
@@ -40,18 +42,22 @@ def calculate_distance(point1, point2):
     # Calculate the distance
     distance = R * c
 
+    if unit == "miles":
+        distance *= 0.621371
+
     return distance
 
-def calculate_distance_vincenty(point1, point2):
+def calculate_distance_vincenty(point1, point2, unit=DEFAULT_UNIT):
     """
     Calculate the distance between two points using the Vincenty formula.
 
     Parameters:
     point1 (tuple): The latitude and longitude of the first point.
     point2 (tuple): The latitude and longitude of the second point.
+    unit (str): The unit of measurement for the distance (default is "km").
 
     Returns:
-    float: The distance between the two points in kilometers.
+    float: The distance between the two points in the specified unit.
 
     Raises:
     ValueError: If the coordinates are invalid.
@@ -107,5 +113,8 @@ def calculate_distance_vincenty(point1, point2):
 
     # Calculate the distance
     distance = b * A * (sigma - deltaSigma) / 1000  # Convert meters to kilometers
+
+    if unit == "miles":
+        distance *= 0.621371
 
     return distance

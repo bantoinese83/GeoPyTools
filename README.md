@@ -134,6 +134,34 @@ Find the centroid of a set of points.
 **Raises:**
 - `ValueError`: If the points list is empty.
 
+## Configuration
+
+GeoPyTools allows you to override default configurations using the `config.py` file. You can set default values for units and API keys.
+
+### Default Configuration
+
+The default configuration is defined in the `config.py` file:
+
+```python
+DEFAULT_UNIT = "km"
+API_KEY = "your-default-api-key"
+
+class Config:
+    unit = "km"
+    timeout = 10
+```
+
+### Overriding Default Configuration
+
+You can override the default configuration at runtime by setting the desired values in the `Config` class:
+
+```python
+from geopytools.config import Config
+
+Config.unit = "miles"
+Config.timeout = 20
+```
+
 ## Versioning and Changelogs
 
 GeoPyTools follows Semantic Versioning. Here are the versioning details:
