@@ -413,3 +413,25 @@ To check the code for linting issues using `flake8`, run the following command:
 ```sh
 flake8 .
 ```
+
+### Running Linting and Formatting Checks Locally
+
+To run linting and formatting checks locally, follow these steps:
+
+1. Install the required dependencies:
+
+```sh
+pip install black flake8
+```
+
+2. Run `black` to check the code formatting:
+
+```sh
+black --check .
+```
+
+3. Run `flake8` to check the code for linting issues:
+
+```sh
+flake8 .
+```
