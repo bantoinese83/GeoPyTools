@@ -112,12 +112,64 @@ class TestCalculateDistance(unittest.TestCase):
         result = await async_haversine_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
 
+    async def test_async_haversine_distance_same_point(self):
+        point = (40.7128, -74.0060)  # New York City
+        expected_distance = 0.0  # Expected distance in kilometers
+        result = await async_haversine_distance(point, point)
+        self.assertAlmostEqual(result, expected_distance, places=2)
+
+    async def test_async_haversine_distance_different_points(self):
+        point1 = (51.5074, -0.1278)  # London
+        point2 = (48.8566, 2.3522)  # Paris
+        expected_distance = 343.77  # Expected distance in kilometers
+        result = await async_haversine_distance(point1, point2)
+        self.assertAlmostEqual(result, expected_distance, places=2)
+
+    async def test_async_haversine_distance_invalid_coordinates(self):
+        point1 = (91.0, -74.0060)  # Invalid latitude
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        with self.assertRaises(ValueError) as context:
+            await async_haversine_distance(point1, point2)
+        self.assertIn("Invalid coordinates for point1", str(context.exception))
+
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -190.2437)  # Invalid longitude
+        with self.assertRaises(ValueError) as context:
+            await async_haversine_distance(point1, point2)
+        self.assertIn("Invalid coordinates for point2", str(context.exception))
+
     async def test_async_vincenty_distance(self):
         point1 = (40.7128, -74.0060)  # New York City
         point2 = (34.0522, -118.2437)  # Los Angeles
         expected_distance = 3935.75  # Expected distance in kilometers using Vincenty formula
         result = await async_vincenty_distance(point1, point2)
         self.assertAlmostEqual(result, expected_distance, places=2)
+
+    async def test_async_vincenty_distance_same_point(self):
+        point = (40.7128, -74.0060)  # New York City
+        expected_distance = 0.0  # Expected distance in kilometers using Vincenty formula
+        result = await async_vincenty_distance(point, point)
+        self.assertAlmostEqual(result, expected_distance, places=2)
+
+    async def test_async_vincenty_distance_different_points(self):
+        point1 = (51.5074, -0.1278)  # London
+        point2 = (48.8566, 2.3522)  # Paris
+        expected_distance = 342.66  # Expected distance in kilometers using Vincenty formula
+        result = await async_vincenty_distance(point1, point2)
+        self.assertAlmostEqual(result, expected_distance, places=2)
+
+    async def test_async_vincenty_distance_invalid_coordinates(self):
+        point1 = (91.0, -74.0060)  # Invalid latitude
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        with self.assertRaises(ValueError) as context:
+            await async_vincenty_distance(point1, point2)
+        self.assertIn("Invalid coordinates for point1", str(context.exception))
+
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -190.2437)  # Invalid longitude
+        with self.assertRaises(ValueError) as context:
+            await async_vincenty_distance(point1, point2)
+        self.assertIn("Invalid coordinates for point2", str(context.exception))
 
 if __name__ == '__main__':
     unittest.main()
