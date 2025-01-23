@@ -21,5 +21,12 @@ class TestGeocodeAddress(unittest.TestCase):
             geocode_address(address)
         self.assertIn("Invalid API key", str(context.exception))
 
+    def test_geocode_address_caching(self):
+        address = "1600 Amphitheatre Parkway, Mountain View, CA"
+        result1 = geocode_address(address)
+        result2 = geocode_address(address)
+        self.assertEqual(result1, result2)
+        self.assertIs(result1, result2)
+
 if __name__ == '__main__':
     unittest.main()

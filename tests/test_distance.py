@@ -69,5 +69,21 @@ class TestCalculateDistance(unittest.TestCase):
             calculate_distance_vincenty(point1, point2)
         self.assertIn("Invalid coordinates for point2", str(context.exception))
 
+    def test_calculate_distance_caching(self):
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        result1 = calculate_distance(point1, point2)
+        result2 = calculate_distance(point1, point2)
+        self.assertEqual(result1, result2)
+        self.assertIs(result1, result2)
+
+    def test_calculate_distance_vincenty_caching(self):
+        point1 = (40.7128, -74.0060)  # New York City
+        point2 = (34.0522, -118.2437)  # Los Angeles
+        result1 = calculate_distance_vincenty(point1, point2)
+        result2 = calculate_distance_vincenty(point1, point2)
+        self.assertEqual(result1, result2)
+        self.assertIs(result1, result2)
+
 if __name__ == '__main__':
     unittest.main()
