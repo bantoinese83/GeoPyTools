@@ -1,7 +1,9 @@
+import os
+
 DEFAULT_UNIT = "km"
-GOOGLE_API_KEY = "your-default-api-key"
-OPENCAGE_API_KEY = "your-opencage-api-key"
-MAPQUEST_API_KEY = "your-mapquest-api-key"
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "your-default-api-key")
+OPENCAGE_API_KEY = os.getenv("OPENCAGE_API_KEY", "your-opencage-api-key")
+MAPQUEST_API_KEY = os.getenv("MAPQUEST_API_KEY", "your-mapquest-api-key")
 
 class Config:
     """
@@ -42,3 +44,12 @@ class Config:
         cls.GOOGLE_API_KEY = GOOGLE_API_KEY
         cls.OPENCAGE_API_KEY = OPENCAGE_API_KEY
         cls.MAPQUEST_API_KEY = MAPQUEST_API_KEY
+
+    @classmethod
+    def load_api_keys_from_env(cls):
+        """
+        Load API keys from environment variables.
+        """
+        cls.GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", cls.GOOGLE_API_KEY)
+        cls.OPENCAGE_API_KEY = os.getenv("OPENCAGE_API_KEY", cls.OPENCAGE_API_KEY)
+        cls.MAPQUEST_API_KEY = os.getenv("MAPQUEST_API_KEY", cls.MAPQUEST_API_KEY)

@@ -435,3 +435,23 @@ black --check .
 ```sh
 flake8 .
 ```
+
+## Setting Environment Variables for API Keys During Testing
+
+To test the API keys without using real API keys, you can set environment variables for the API keys. This allows you to use mock API keys during testing. Here are the steps to set environment variables for API keys:
+
+1. Set the environment variables for the API keys:
+
+```sh
+export GOOGLE_API_KEY=mock-google-api-key
+export OPENCAGE_API_KEY=mock-opencage-api-key
+export MAPQUEST_API_KEY=mock-mapquest-api-key
+```
+
+2. Run the tests:
+
+```sh
+python -m unittest discover
+```
+
+By setting the environment variables for the API keys, you can test the API keys without using real API keys. This ensures that your tests do not rely on real API keys and can be run in any environment.
