@@ -1,7 +1,7 @@
 import unittest
 from geotools.geocode import geocode_address, async_geocode_address
 
-class TestGeocodeAddress(unittest.TestCase):
+class TestGeocodeAddress(unittest.IsolatedAsyncioTestCase):
 
     def test_geocode_address_valid(self):
         address = "1600 Amphitheatre Parkway, Mountain View, CA"

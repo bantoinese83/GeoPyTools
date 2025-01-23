@@ -3,13 +3,14 @@ from geotools.config import Config
 from functools import lru_cache
 
 @lru_cache(maxsize=128)
-def geocode_address(address, api="google"):
+def geocode_address(address, api="google", api_key=None):
     """
     Geocode an address using a geocoding API.
 
     Parameters:
     address (str): The address to geocode.
     api (str): The geocoding API to use ("google", "opencage", "mapquest").
+    api_key (str): The API key to use for the geocoding API.
 
     Returns:
     tuple: The latitude and longitude of the address.
@@ -21,19 +22,19 @@ def geocode_address(address, api="google"):
         api_url = "https://maps.googleapis.com/maps/api/geocode/json"
         params = {
             "address": address,
-            "key": Config.GOOGLE_API_KEY
+            "key": api_key or Config.GOOGLE_API_KEY
         }
     elif api == "opencage":
         api_url = "https://api.opencagedata.com/geocode/v1/json"
         params = {
             "q": address,
-            "key": Config.OPENCAGE_API_KEY
+            "key": api_key or Config.OPENCAGE_API_KEY
         }
     elif api == "mapquest":
         api_url = "http://www.mapquestapi.com/geocoding/v1/address"
         params = {
             "location": address,
-            "key": Config.MAPQUEST_API_KEY
+            "key": api_key or Config.MAPQUEST_API_KEY
         }
     else:
         raise ValueError("Unsupported API. Please use 'google', 'opencage', or 'mapquest'.")
@@ -74,13 +75,14 @@ def geocode_address(address, api="google"):
         else:
             raise Exception("Geocoding API error: " + str(data["info"]["statuscode"]))
 
-async def async_geocode_address(address, api="google"):
+async def async_geocode_address(address, api="google", api_key=None):
     """
     Asynchronously geocode an address using a geocoding API.
 
     Parameters:
     address (str): The address to geocode.
     api (str): The geocoding API to use ("google", "opencage", "mapquest").
+    api_key (str): The API key to use for the geocoding API.
 
     Returns:
     tuple: The latitude and longitude of the address.
@@ -88,4 +90,4 @@ async def async_geocode_address(address, api="google"):
     Raises:
     ValueError: If the API key is invalid or the address format is unsupported.
     """
-    return geocode_address(address, api)
+    return geocode_address(address, api, api_key)
