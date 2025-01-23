@@ -10,9 +10,15 @@ class Config:
     Attributes:
     unit (str): The unit of measurement for distances (default is "km").
     timeout (int): The timeout value for API requests (default is 10 seconds).
+    API_KEY (str): The API key for Google Geocoding API.
+    OPENCAGE_API_KEY (str): The API key for OpenCage Geocoding API.
+    MAPQUEST_API_KEY (str): The API key for MapQuest Geocoding API.
     """
     unit = "km"
     timeout = 10
+    API_KEY = API_KEY
+    OPENCAGE_API_KEY = OPENCAGE_API_KEY
+    MAPQUEST_API_KEY = MAPQUEST_API_KEY
 
     @classmethod
     def update_config(cls, **kwargs):
