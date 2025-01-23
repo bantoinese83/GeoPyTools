@@ -282,6 +282,26 @@ Config.unit = "miles"
 Config.timeout = 20
 ```
 
+### Updating Configuration Values at Runtime
+
+You can update configuration values at runtime using the `update_config` method of the `Config` class. For example, to update the unit of measurement to miles and the timeout value to 20 seconds, you can do the following:
+
+```python
+from geopytools.config import Config
+
+Config.update_config(unit="miles", timeout=20)
+```
+
+### Resetting Configuration Values to Defaults
+
+You can reset configuration values to their default values using the `reset_config` method of the `Config` class. For example, to reset the configuration values to their default values, you can do the following:
+
+```python
+from geopytools.config import Config
+
+Config.reset_config()
+```
+
 ## Using the `batch_size` Parameter in `calculate_centroid`
 
 The `calculate_centroid` function allows you to calculate the centroid of a set of points. It has an optional `batch_size` parameter that can be used to process large inputs in batches. Here is how you can use the `batch_size` parameter:

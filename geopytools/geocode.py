@@ -1,5 +1,5 @@
 import requests
-from geopytools.config import API_KEY, OPENCAGE_API_KEY, MAPQUEST_API_KEY
+from geopytools.config import Config
 from functools import lru_cache
 
 @lru_cache(maxsize=128)
@@ -21,19 +21,19 @@ def geocode_address(address, api="google"):
         api_url = "https://maps.googleapis.com/maps/api/geocode/json"
         params = {
             "address": address,
-            "key": API_KEY
+            "key": Config.API_KEY
         }
     elif api == "opencage":
         api_url = "https://api.opencagedata.com/geocode/v1/json"
         params = {
             "q": address,
-            "key": OPENCAGE_API_KEY
+            "key": Config.OPENCAGE_API_KEY
         }
     elif api == "mapquest":
         api_url = "http://www.mapquestapi.com/geocoding/v1/address"
         params = {
             "location": address,
-            "key": MAPQUEST_API_KEY
+            "key": Config.MAPQUEST_API_KEY
         }
     else:
         raise ValueError("Unsupported API. Please use 'google', 'opencage', or 'mapquest'.")

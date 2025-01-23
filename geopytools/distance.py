@@ -1,9 +1,9 @@
 import math
-from geopytools.config import DEFAULT_UNIT
+from geopytools.config import Config
 from functools import lru_cache
 
 @lru_cache(maxsize=128)
-def haversine_distance(point1, point2, unit=DEFAULT_UNIT):
+def haversine_distance(point1, point2, unit=None):
     """
     Calculate the distance between two points using the Haversine formula.
 
@@ -44,13 +44,16 @@ def haversine_distance(point1, point2, unit=DEFAULT_UNIT):
     # Calculate the distance
     distance = R * c
 
+    if unit is None:
+        unit = Config.unit
+
     if unit == "miles":
         distance *= 0.621371
 
     return distance
 
 @lru_cache(maxsize=128)
-def vincenty_distance(point1, point2, unit=DEFAULT_UNIT):
+def vincenty_distance(point1, point2, unit=None):
     """
     Calculate the distance between two points using the Vincenty formula.
 
@@ -117,12 +120,15 @@ def vincenty_distance(point1, point2, unit=DEFAULT_UNIT):
     # Calculate the distance
     distance = b * A * (sigma - deltaSigma) / 1000  # Convert meters to kilometers
 
+    if unit is None:
+        unit = Config.unit
+
     if unit == "miles":
         distance *= 0.621371
 
     return distance
 
-async def async_haversine_distance(point1, point2, unit=DEFAULT_UNIT):
+async def async_haversine_distance(point1, point2, unit=None):
     """
     Asynchronously calculate the distance between two points using the Haversine formula.
 
@@ -139,7 +145,7 @@ async def async_haversine_distance(point1, point2, unit=DEFAULT_UNIT):
     """
     return haversine_distance(point1, point2, unit)
 
-async def async_vincenty_distance(point1, point2, unit=DEFAULT_UNIT):
+async def async_vincenty_distance(point1, point2, unit=None):
     """
     Asynchronously calculate the distance between two points using the Vincenty formula.
 
