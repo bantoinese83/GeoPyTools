@@ -381,3 +381,29 @@ We have a roadmap to let users know what's planned next. Here are some of the up
 ## License
 
 GeoPyTools is licensed under the MIT License. See the LICENSE file for more information.
+
+## Linting and Formatting
+
+To ensure code quality and consistency, we use `black` for code formatting and `flake8` for linting. You can run these tools locally to check your code before committing.
+
+### Running Black
+
+To check the code formatting using `black`, run the following command:
+
+```sh
+black --check .
+```
+
+If you want to automatically format the code, run:
+
+```sh
+black .
+```
+
+### Running Flake8
+
+To check the code for linting issues using `flake8`, run the following command:
+
+```sh
+flake8 .
+```
