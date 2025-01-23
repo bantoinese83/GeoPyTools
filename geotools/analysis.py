@@ -1,5 +1,29 @@
 import numpy as np
 
+def batch_iterator(data, size):
+    """
+    Generate batches of data for processing.
+
+    Parameters:
+    data (list or generator): The data to be processed in batches.
+    size (int): The size of each batch.
+
+    Yields:
+    list: A batch of data.
+    """
+    if isinstance(data, list):
+        for i in range(0, len(data), size):
+            yield data[i:i + size]
+    else:
+        batch = []
+        for item in data:
+            batch.append(item)
+            if len(batch) == size:
+                yield batch
+                batch = []
+        if batch:
+            yield batch
+
 def calculate_centroid(points, batch_size=1000):
     """
     Calculate the centroid of a set of points.
@@ -16,30 +40,6 @@ def calculate_centroid(points, batch_size=1000):
     """
     if not points:
         raise ValueError("No points provided. Please provide a list of points.")
-
-    def batch_iterator(data, size):
-        """
-        Generate batches of data for processing.
-
-        Parameters:
-        data (list or generator): The data to be processed in batches.
-        size (int): The size of each batch.
-
-        Yields:
-        list: A batch of data.
-        """
-        if isinstance(data, list):
-            for i in range(0, len(data), size):
-                yield data[i:i + size]
-        else:
-            batch = []
-            for item in data:
-                batch.append(item)
-                if len(batch) == size:
-                    yield batch
-                    batch = []
-            if batch:
-                yield batch
 
     total_latitude = 0
     total_longitude = 0
